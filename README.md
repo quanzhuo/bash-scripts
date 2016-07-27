@@ -10,3 +10,6 @@ Sync local repo with remote automatic.
 
 * for-each.bash  
 A useful script to traversal each item  in a directory recursively.
+
+* gen-files.sh  
+Generate a series of files to fill up android phone's sdcard.
