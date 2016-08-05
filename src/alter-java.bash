@@ -68,9 +68,12 @@ else
 	    exit 0
 	    ;;
 	*)
-	    if test -d $1/bin
+	    BASENAME=$(basename $1)
+	    DIRNAME=$(dirname $1)
+	    PATHNAME=$DIRNAME/$BASENAME
+	    if test -d $PATHNAME/bin
 	    then
-		alter_java $1
+		alter_java $PATHNAME
 	    else
 		usage
 		exit 1
