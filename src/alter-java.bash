@@ -5,10 +5,11 @@
 
 function usage()
 {
-    echo "Usage: "
-    echo "./alter_java dir:  make cmds under dir/bin as default"
-    echo "./alter_java -h | --help:"
-    echo "                   show this message and exit"
+    cat <<EOF
+Usage: 
+./alter_java  dir:        make cmds under dir/bin as default.
+./alter_java  -h|--help:  show this message and exit.
+EOF
 }
 
 function should_add_to_path()
@@ -63,10 +64,7 @@ then
     exit 1
 else
     case $1 in
-	-h|--help)
-	    usage
-	    exit 0
-	    ;;
+	-h|--help) usage; exit 0; ;;
 	*)
 	    BASENAME=$(basename $1)
 	    DIRNAME=$(dirname $1)
