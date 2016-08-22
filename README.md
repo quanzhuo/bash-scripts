@@ -1,15 +1,13 @@
 bash-scripts
 ===
+
 This repository contains some useful bash scripts and commands usage.
 
-* alter-java.bash  
-This script make you able to choose your perfered java as the default java on your system. Just run the script to see how to use it.
-
-* sync-repos.bash  
-Sync local repo with remote automatic.
-
-* for-each.bash  
-A useful script to traversal each item  in a directory recursively.
-
-* gen-files.sh  
-Generate a series of files to fill up android phone's sdcard.
++   alter-java.bash: This script make you able to choose your perfered java as 
+	default on your system. Just run the script to see how to use it.
++   sync-repos.bash: Sync local repo with remote automatic.
++   for-each.bash: A useful script to traversal each item  in a directory 
+	recursively.
++   gen-files.sh: Generate a series of files to fill up android phone's sdcard.
++   fastboot-reboot-tr.sh: tranfer android phone between fastboot mode and 
+	normal boot.
