@@ -24,6 +24,9 @@ function should_add_to_path()
     then
 	return 1
     fi
+    if test "$1" = "jmc.ini"
+        return 1
+    fi
     
     return 0
 }
