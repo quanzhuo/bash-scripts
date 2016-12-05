@@ -49,11 +49,31 @@ call:test_then_copy %D1C_TOP%\RPM.BF.2.2\rpm_proc\build\ms\bin\8937\rpm.mbn %2\
 REM FTM
 call:test_then_copy %D1C_TOP%\FTM\out\ftm.img %2\
 
+rem aboot
+set AP_PATH=%D1C_TOP%\LINUX\out_img\D1C
+call:test_then_copy %AP_PATH%\*emmc_appsboot.mbn %2\emmc_appsboot.mbn
+
+rem userdata.img
+set USERDATA_PATH=%D1C_TOP%\LINUX\android\out\target\product\D1C
+call:test_then_copy %USERDATA_PATH%\userdata.img %2\userdata.img
+
+rem other ap images 
+set MODEL=%3
+rem boot and cache are the same in all models 
+call:test_then_copy %AP_PATH%\D1C*0001-boot.img %2\boot.img
+call:test_then_copy %AP_PATH%\D1C*0001-cache.img %2\cache.img
+call:test_then_copy %AP_PATH%\D1C*%MODEL%-mdtp.img %2\mdtp.img
+call:test_then_copy %AP_PATH%\D1C*%MODEL%-persist.img %2\persist.img
+call:test_then_copy %AP_PATH%\D1C*%MODEL%-ramdisk.img %2\ramdisk.img
+call:test_then_copy %AP_PATH%\D1C*%MODEL%-ramdisk-recovery.img %2\ramdisk-recovery.img
+call:test_then_copy %AP_PATH%\D1C*%MODEL%-recovery.img %2\recovery.img
+call:test_then_copy %AP_PATH%\D1C*%MODEL%-system.img %2\system.img
+
 REM copy file if the file exists
 :test_then_copy
 if exist %1 (
     echo copying %1
-    xcopy /Q %1 %2 > nul
+    echo f | xcopy /Q %1 %2 > nul
 ) else (
     echo %1 does not exist.
 )
