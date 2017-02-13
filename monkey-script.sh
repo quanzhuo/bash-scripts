@@ -13,7 +13,12 @@ while [ $i -lt 5000 ]; do
     input tap 250 1200
     input tap 360 1200
 
-    # press back key
+    # pause for a while
+    sleep 0.3
+
+    # digit '4' stands for  press the back key.
+	# try 'input' command in adb shell to see
+    # more about 'input' command
     input keyevent 4
     input tap 210 1180
     input keyevent 4
@@ -21,6 +26,7 @@ while [ $i -lt 5000 ]; do
     input keyevent 4
     input keyevent 4
     input keyevent 4
+
     let i++
     echo $i > /sdcard/count
 done
