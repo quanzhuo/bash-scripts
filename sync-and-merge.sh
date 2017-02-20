@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# use at to execute this file in midnight
+# the exact command is: at -f /path/to/sync-and-merge.sh 23:55
+
 LOGDIR=/home/quan/Documents/synccode
 LOGFILE=/home/quan/Documents/synccode/log-$(date "+%Y-%m-%d")
 if ! [ -d $LOGFILE ];then
