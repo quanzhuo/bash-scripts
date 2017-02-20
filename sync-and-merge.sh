@@ -61,7 +61,9 @@ date | tr '\n' ' ' >> $LOGFILE
 echo "--> start merge use rsync" >> $LOGFILE
 rsync -av --exclude=.repo/ --exclude=.git/ --exclude=prevHEAD \
       --exclude=.gitignore --exclude=MSM8940/ --exclude=MPSS.TA.2.3/ \
-      -c -i --no-times --no-perms --delete d1c/ ple/ > $LOGDIR/rsync-$(date "+%Y-%m-%d")
+      -c -i --no-times --no-perms --delete d1c/ ple/ \
+      > $LOGDIR/rsync-$(date "+%Y-%m-%d") \
+      2 > $LOGDIR/rsync-error-$(date "+%Y-%m-%d")
 
 if [ $? -eq 0 ];then
     date | tr '\n' ' ' >> $LOGFILE
