@@ -9,21 +9,19 @@ unset https_proxy
 
 LOGDIR=/home/quan/Documents/synccode
 LOGFILE=/home/quan/Documents/synccode/log-$(date "+%Y-%m-%d")
+
+rm -rf $LOGFILE
+
 if ! [ -d $LOGFILE ];then
     mkdir -p $LOGDIR
 fi
-
-if ! [ -f $LOGFILE ]; then
-    touch $LOGFILE
-fi
-
 
 # 1. sync the code
 cd /home/quan/workspace/repos/d1c
 
 while true
 do
-    date | tr '\n' ' ' > $LOGFILE
+    date | tr '\n' ' ' >> $LOGFILE
     echo "--> start to sync code from tb" >> $LOGFILE
     tbrepo sync
     if [ $? -eq 0 ];then
