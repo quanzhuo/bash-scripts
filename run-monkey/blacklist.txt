@@ -1,0 +1,6 @@
+com.miui.securitycenter.remote
+com.miui.securitycenter
+com.miui.securityadd
+com.miui.securitycore
+com.miui.powercenter.PowerCenter
+
