@@ -1,5 +1,5 @@
 # This file is a template for android phone
-# monkey test
+# auto test
 
 let i=0;
 while [ $i -lt 5000 ]; do
