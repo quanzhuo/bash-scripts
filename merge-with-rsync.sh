@@ -17,13 +17,16 @@ if ! [ -d $LOGFILE ];then
 fi
 
 # 1. sync the code
-cd /home/quan/workspace/repos/d1c
+D1C=/home/quan/workspace/repos/d1c
+PLE=/home/quan/workspace/repos/ple
+
+cd $D1C
 
 while true
 do
     date | tr '\n' ' ' >> $LOGFILE
     echo "--> start to sync code from tb" >> $LOGFILE
-    tbrepo sync
+    tbrepo sync -c
     if [ $? -eq 0 ];then
 	date | tr '\n' ' ' >> $LOGFILE
 	echo "--> sync successfully" >> $LOGFILE
@@ -35,19 +38,19 @@ do
 done
 
 # 2. get ple code
-if [ -d /home/quan/workspace/repos/ple ];then
+if [ -d $PLE ];then
     date | tr '\n' ' ' >> $LOGFILE
-    echo "--> remove old directory /home/quan/workspace/repos/ple" >> $LOGFILE
-    rm -rf /home/quan/workspace/repos/ple
+    echo "--> remove old directory $PLE" >> $LOGFILE
+    rm -rf $PLE
 fi
 
-if [ -f /home/quan/workspace/repos/ple ];then
-    rm -rf /home/quan/workspace/repos/ple
+if [ -f $PLE ];then
+    rm -rf $PLE
 fi
 
-mkdir /home/quan/workspace/repos/ple
+mkdir $PLE
 
-cd /home/quan/workspace/repos/ple
+cd $PLE
 
 zzrepo init -u ssh://H2404689@10.195.229.38:29418/QC/manifest.git \
        -b dev/MSM89xx -m 2012000_BUILD.xml
@@ -56,7 +59,7 @@ while true
 do
     date | tr '\n' ' ' >> $LOGFILE
     echo "--> sync code from zz" >> $LOGFILE
-    zzrepo sync
+    zzrepo sync -c
     if [ $? -eq 0 ];then
 	date | tr '\n' ' ' >> $LOGFILE
         echo "--> sync from zz successfully" >> $LOGFILE
@@ -68,14 +71,13 @@ do
 done
 
 # 3. merge code
-cd /home/quan/workspace/repos
 date | tr '\n' ' ' >> $LOGFILE
 echo "--> start merge use rsync" >> $LOGFILE
 rsync -av --exclude=.repo/ --exclude=.git/ --exclude=prevHEAD \
       --exclude=.gitignore --exclude=MSM8940/ --exclude=MPSS.TA.2.3/ \
-      -c -i --no-times --no-perms --delete d1c/ ple/ \
-      > $LOGDIR/rsync-$(date "+%Y-%m-%d") \
-      2 > $LOGDIR/rsync-error-$(date "+%Y-%m-%d")
+      -c -i --no-times --no-perms --delete $D1C/ $PLE/ \
+      >$LOGDIR/rsync-$(date "+%Y-%m-%d") \
+      2>$LOGDIR/rsync-error-$(date "+%Y-%m-%d")
 
 # we can use the following commands to speed up
 # rsync -av --exclude=.git/ --exclude=prevHEAD --exclude=.gitignore -c -i --no-times --no-perms  --delete d1c/LINUX/android/external/ ple/LINUX/android/external/
