@@ -1,7 +1,34 @@
 #!/bin/bash
 
-for var in system_app_crash@*
-do
-    echo $var;
-    echo @$var | grep -E "@[0-9]{10}" -o | xargs date -d
-done
+function parse() {
+
+    if ! ls $1 &> /dev/null
+    then
+       return
+    fi
+
+    for var in `ls $1`
+    do
+	echo $var | grep -E "@[0-9]{10}" -o | xargs date -d | tr '\n' ' '
+	echo "-->> $var"
+    done
+    echo
+}
+
+parse 'FRAMEWORK_REBOOT@*'
+parse 'SYSTEM_RESTART@*'
+parse 'SYSTEM_BOOT@*'
+parse 'system_server_watchdog@*'
+parse 'system_server_crash@*'
+parse 'system_app_crash@*'
+parse 'system_app_native_crash@*'
+parse 'data_app_native_crash@*'
+parse 'data_app_crash@*'
+parse 'system_app_anr@*'
+parse 'data_app_anr@*'
+parse 'SYSTEM_TOMBSTONE@*'
+parse 'SYSTEM_LAST_KMSG@*'
+parse 'SYSTEM_RECOVERY_KMSG@*'
+parse 'SYSTEM_AUDIT@*'
+parse 'system_server_wtf@*'
+parse 'system_app_wtf@*'
