@@ -7,10 +7,17 @@ function parse() {
        return
     fi
 
-    for var in `ls $1`
+    for var in `ls -d $1`
     do
 	echo $var | grep -E "@[0-9]{10}" -o | xargs date -d | tr '\n' ' '
-	echo "-->> $var"
+
+	if [ -f $var ]
+	then
+	    t=
+	else
+	    t=/
+	fi
+	echo "-->> $var$t"
     done
     echo
 }
