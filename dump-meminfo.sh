@@ -1,5 +1,9 @@
 # This script dump meminfo of each system process
 # every 2 minutes
+# You can use this script like this:
+# 1. adb push dump-meminfo.sh /sdcard/
+# 2. adb shell
+# 3. sh /sdcard/dump-meminfo.sh &> /dev/null &
 
 MEMINFO_FILE=/sdcard/meminfo.txt
 
