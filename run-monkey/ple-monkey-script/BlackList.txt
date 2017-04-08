@@ -1,0 +1,4 @@
+com.google.android.googlequicksearchbox
+com.android.development
+com.evenwell.magictorch
+com.evenwell.DbgCfgTool
