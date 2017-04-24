@@ -21,13 +21,16 @@ def do_parse(file_list, pattern):
     files = ls_with_pattern(file_list, pattern)
     if not files:
         return
+    print pattern.center(70, '-')
     for file_name in files:
         # print "file-name: ", file_name
         m = re.search(r"[0-9]{13}", file_name)
+        if os.path.isdir(file_name):
+            file_name = file_name + '/'
         unix_time = m.group(0)
         datetime_str = unix_time[:-3] + "." + unix_time[-3:]
         readable = datetime.datetime.fromtimestamp(float(datetime_str)).isoformat(' ')
-        print "%-40s%15s" % (file_name, readable)
+        print "%-45s%15s" % (file_name, readable)
     print
 
 def parse(file_list):
