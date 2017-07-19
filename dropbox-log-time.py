@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os
 import re
@@ -21,17 +21,16 @@ def do_parse(file_list, pattern):
     files = ls_with_pattern(file_list, pattern)
     if not files:
         return
-    print pattern.center(70, '-')
+    print(pattern.center(70, '-'))
     for file_name in files:
-        # print "file-name: ", file_name
         m = re.search(r"[0-9]{13}", file_name)
         if os.path.isdir(file_name):
             file_name = file_name + '/'
         unix_time = m.group(0)
         datetime_str = unix_time[:-3] + "." + unix_time[-3:]
         readable = datetime.datetime.fromtimestamp(float(datetime_str)).isoformat(' ')
-        print "%-45s%15s" % (file_name, readable)
-    print
+        print("%-45s%15s" % (file_name, readable))
+    print()
 
 def parse(file_list):
     do_parse(file_list, "FRAMEWORK_REBOOT")
@@ -55,5 +54,5 @@ def parse(file_list):
 
 if __name__ == "__main__":
     all_files =  os.listdir(".")
-    files_with_time_stamp = filter(contains_time_stamp, all_files)
+    files_with_time_stamp = [ x for x in all_files if contains_time_stamp(x) ]
     parse(files_with_time_stamp)
