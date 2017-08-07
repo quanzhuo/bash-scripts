@@ -33,6 +33,7 @@ def do_parse(file_list, pattern):
     print()
 
 def parse(file_list):
+    do_parse(file_list, "UNKNOWN_RESET")
     do_parse(file_list, "FRAMEWORK_REBOOT")
     do_parse(file_list, "SYSTEM_RESTART")
     do_parse(file_list, "SYSTEM_BOOT")
