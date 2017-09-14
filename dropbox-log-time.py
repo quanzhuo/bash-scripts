@@ -39,6 +39,7 @@ def parse(file_list):
     do_parse(file_list, "SYSTEM_BOOT")
     do_parse(file_list, "system_server_watchdog")
     do_parse(file_list, "system_server_crash")
+    do_parse(file_list, "system_server_anr")
     do_parse(file_list, "system_app_crash")
     do_parse(file_list, "system_app_native_crash")
     do_parse(file_list, "data_app_native_crash")
