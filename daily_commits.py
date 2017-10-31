@@ -67,7 +67,12 @@ to_addrs = ['ethan.xt.chen@mail.foxconn.com',
 
 yesterday = getYesterday()
 rest_api_uri = "http://gerrit.fihtdc.com/a/changes/?q=status:merged+owner:self+after:" + yesterday + "&o=CURRENT_REVISION"
-response = requests.get(rest_api_uri,
+
+# disable proxy
+session = requests.Session()
+session.trust_env = False
+
+response = session.get(rest_api_uri,
              auth=HTTPDigestAuth("nj-app01", "DYgHIHf912MKHcyzQuraqwafkLSQ8EmeEq38wo9qtg"))
 data = response.text
 json_data = data[5:]  #remove invalid data
@@ -98,7 +103,7 @@ from_addr = "daily-commits-summary@zzdc.com"
 smtp_server = "mailgw.fihtdc.com"
 
 msg = MIMEText(mail_body, 'plain', 'utf-8')
-msg['From'] = _format_addr(u'昨天的提交 <%s>' % from_addr)
+msg['From'] = _format_addr(u'每日提交汇总 <%s>' % from_addr)
 #msg['To'] = _format_addr(u'管理员 <%s>' % to_addr)
 msg['Subject'] = Header(u'nj-app01 昨天所有的提交', 'utf-8').encode()
 
