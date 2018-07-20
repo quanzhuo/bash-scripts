@@ -77,8 +77,8 @@ def unix_to_readable(unix_time):
 
 
 def get_pkgname_sys_app_crash(pathname):
-    f = open(pathname, errors='ignore')
-    firstline = f.readline()
+    with open(pathname, errors='ignore') as f:
+        firstline = f.readline()
     return firstline.split(":")[1].strip()
 
 
@@ -103,12 +103,12 @@ def get_pkgname_data_app_native_crash(filepath):
 
 
 def get_pkgname_system_tombstone(filepath):
-    f = open(filepath, errors='ignore')
     pkgname = "UNKNOWN"
-    for line in f:
-        if ">>> " in line:
-            pkgname = line.split(">>>")[1].strip().split()[0]
-            break
+    with open(filepath, errors='ignore') as f:
+        for line in f:
+            if ">>> " in line:
+                pkgname = line.split(">>>")[1].strip().split()[0]
+                break
     return pkgname
 
 
